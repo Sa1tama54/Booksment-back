@@ -8,8 +8,8 @@ module.exports.genreController = {
                 description: req.body.description
             });
             res.json("Жанр добавлен");
-          } catch (err) {
-            res.json(err);
+          } catch (error) {
+            res.json({error: 'Ошибка в добавлении жанра'});
           }
       },
     
@@ -17,8 +17,8 @@ module.exports.genreController = {
         try {
           const genre = await Genre.find({});
           res.json(genre);
-        } catch (e) {
-          res.json(e);
+        } catch (error) {
+          res.json({error: 'Ошибка в выводе жанров'});
         }
       },
 };
