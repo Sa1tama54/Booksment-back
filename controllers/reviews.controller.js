@@ -22,7 +22,7 @@ module.exports.reviewController = {
   addLike: async (req, res) => {
     try {
    const like = await Review.findByIdAndUpdate(req.params.id, {
-        $push: { likes: req.body.likes },
+        $addToSet: { likes: req.body.likes },
       });
       res.json(like);
     } catch (err) {
@@ -32,7 +32,7 @@ module.exports.reviewController = {
   delLike: async (req, res) => {
     try {
       const likeDel = await Review.findByIdAndUpdate(req.params.id, {
-        $pull: { likes: req.params.likes },
+        $pull: { likes: req.body.likes },
       });
       res.json(likeDel);
     } catch (err) {
