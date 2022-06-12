@@ -9,8 +9,8 @@ module.exports.authorController = {
         description: req.body.description
       });
       res.json("Автор добавлен");
-    } catch (err) {
-      res.json(err);
+    } catch (error) {
+      res.json({error: 'Ошибка в добавлении автора'});
     }
   },
 
@@ -18,8 +18,8 @@ module.exports.authorController = {
     try {
       const Authors = await Author.find({})
       res.json(Authors);
-    } catch (err) {
-      res.json(err);
+    } catch (error) {
+      res.json({error: 'Ошибка в выводе всех авторов'});
     }
   },
 
@@ -27,8 +27,8 @@ module.exports.authorController = {
     try {
       const AuthorById = await Author.find({}).populate("bibliography");
       res.json(AuthorById);
-    } catch (err) {
-      res.json(err);
+    } catch (error) {
+      res.json({error: 'Ошибка в выводе определенного автора'});
     }
   },
 };

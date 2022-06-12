@@ -7,36 +7,36 @@ module.exports.reviewController = {
             text: req.body.text,
             grade: req.body.grade
         });
-    } catch (err) {
-      res.json(err);
+    } catch (error) {
+      res.json({error: 'Ошибка в добавлении отзыва'});
     }
   },
   getRevBookId: async (req, res) => {
     try {
       const rev = await Review.find({ book: req.params.id }).populate("user");
       res.json(rev);
-    }catch (err) {
-      res.json(err);
+    }catch (error) {
+      res.json({error: 'Ошибка в выводе отзыва на книгу'});
     }
   },
   addLike: async (req, res) => {
     try {
    const like = await Review.findByIdAndUpdate(req.params.id, {
-        $push: { likes: req.body.likes },
+        $addToSet: { likes: req.body.likes },
       });
       res.json(like);
-    } catch (err) {
-      res.json(err);
+    } catch (error) {
+      res.json({error: 'Ошибка в добавлении лайка на отзыв'});
     }
   },
   delLike: async (req, res) => {
     try {
       const likeDel = await Review.findByIdAndUpdate(req.params.id, {
-        $pull: { likes: req.params.likes },
+        $pull: { likes: req.body.likes },
       });
       res.json(likeDel);
-    } catch (err) {
-      res.json(err);
+    } catch (error) {
+      res.json({error: 'Ошибка удаления лайка на отзыв'});
     }
   },
 };
