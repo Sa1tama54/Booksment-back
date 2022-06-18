@@ -49,6 +49,16 @@ module.exports.bookController = {
       res.json({ error: "Ошибка при вызове" });
     }
   },
+  getDiscountBook: async (req, res) => {
+    try {
+      const book = await Book.find({ discount: { $gt: 0 } }).populate(
+        "genres author rating"
+      );
+      res.json(book);
+    } catch (error) {
+      res.json({ error: "Ошибка при вызове" });
+    }
+  },
 
   getOneBook: async (req, res) => {
     try {
