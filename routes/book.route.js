@@ -5,7 +5,8 @@ const routerBook = Router();
 
 routerBook.post("/", bookController.createBook);
 routerBook.get("/", bookController.getAllBook);
-routerBook.get('/discount', bookController.getDiscountBook)
+routerBook.get("/discount", bookController.getDiscountBook);
+routerBook.get("/new", bookController.getNewBook);
 routerBook.get("/:id", bookController.getOneBook);
 routerBook.get("/genre/:id", bookController.getBooksOnGenre);
 routerBook.get("/author/:id", bookController.getBooksOnAuthor);

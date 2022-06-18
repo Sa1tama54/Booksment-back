@@ -60,6 +60,17 @@ module.exports.bookController = {
     }
   },
 
+  getNewBook: async (req, res) => {
+    try {
+      const book = await Book.find({ publicationYear: { $eq: 2022 } }).populate(
+        "genres author rating"
+      );
+      res.json(book);
+    } catch (error) {
+      res.json({ error: "Ошибка при вызове" });
+    }
+  },
+
   getOneBook: async (req, res) => {
     try {
       const book = await Book.findById(req.params.id).populate(
