@@ -52,4 +52,24 @@ module.exports.reviewController = {
       res.json({error: 'Ошибка удаления лайка на отзыв'});
     }
   },
+  addDislike: async (req, res) => {
+    try {
+      const dilike = await Review.findByIdAndUpdate(req.params.id, {
+        $addToSet: { dislikes: req.body.dislikes },
+      });
+      res.json(dilike);
+    } catch (error) {
+      res.json({error: 'Ошибка добавления лайка на отзыв'});
+    }
+  },
+  delDislike: async (req, res) => {
+    try {
+      const dislikeDel = await Review.findByIdAndUpdate(req.params.id, {
+        $pull: { dislikes: req.body.dislikes },
+      });
+      res.json(dislikeDel);
+    } catch (error) {
+      res.json({error: 'Ошибка удаления лайка на отзыв'});
+    }
+  },
 };
