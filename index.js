@@ -4,19 +4,15 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 
-const port = 3001;
-
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(require("./routes"));
-app.use('/public', express.static(path.resolve(__dirname, "public")));
+app.use("/public", express.static(path.resolve(__dirname, "public")));
 
-mongoose
-  .connect("mongodb+srv://user1:admin@cluster0.rqoqm.mongodb.net/open-book")
-  .then(() => {
-    app.listen(port, () =>
-      console.log(`Server has been started, http://localhost:${port}`)
-    );
-  });
+mongoose.connect(process.env.MONGODV_SERV).then(() => {
+  app.listen(port, () =>
+    console.log(`Server has been started, http://localhost:${process.env.PORT}`)
+  );
+});
