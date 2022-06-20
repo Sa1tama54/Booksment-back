@@ -11,7 +11,7 @@ module.exports.reviewController = {
       });
       res.json(createReview)
     } catch (error) {
-      res.json({error: 'Отзыв создан'});
+      res.json({error: 'ошибка добавления отзыва'});
     }
   },
 
