@@ -14,6 +14,16 @@ module.exports.reviewController = {
       res.json({error: 'Отзыв создан'});
     }
   },
+
+  getReviews: async (req, res) => {
+    try {
+      const rev = await Review.find().populate("user book likes");
+      res.json(rev);
+    } catch (error) {
+      res.json({error: 'Ошибка вывода отзыв'});
+    }
+  },
+
   getRevBookId: async (req, res) => {
     try {
       const rev = await Review.find({ book: req.params.id }).populate("user");
