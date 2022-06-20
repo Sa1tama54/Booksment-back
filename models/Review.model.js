@@ -16,6 +16,12 @@ const reviewShema = mongoose.Schema({
       ref: "User",
       type: mongoose.Schema.Types.ObjectId,
     },
+  ],
+  dislikes: [
+    {
+      ref: "User",
+      type: mongoose.Schema.Types.ObjectId,
+    },
   ]
 });
 
